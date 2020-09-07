@@ -67,7 +67,7 @@ Here's an example that uses the *countries* table.
 ```php
 <?php
 try{
-       $conn = new PDO('mysql:host=localhost;dbname=examples', 'cit2202', 'letmein');
+       $conn = new PDO('mysql:host=localhost;dbname=cit2202', 'cit2202', 'letmein');
        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch (PDOException $exception)
@@ -119,7 +119,7 @@ The previous example used ```fetchAll()```. ```fetchAll()``` retrieves all the r
 ```php
 <?php
 try{
-       $conn = new PDO('mysql:host=localhost;dbname=examples', 'cit2202', 'letmein');
+       $conn = new PDO('mysql:host=localhost;dbname=cit2202', 'cit2202', 'letmein');
        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch (PDOException $exception)
@@ -148,7 +148,7 @@ The second way in which we will run SQL statements using PDO is using prepared s
 ```php
 <?php
 try{
-       $conn = new PDO('mysql:host=localhost;dbname=examples', 'cit2202', 'letmein');
+       $conn = new PDO('mysql:host=localhost;dbname=cit2202', 'cit2202', 'letmein');
        $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch (PDOException $exception)
@@ -187,4 +187,4 @@ Take a bit of time to compare the use of the ```query()``` method and prepared s
 ## Implementing Basic CRUD functionality.
 Using these basic techniques we can implement CRUD functionality for a web application. The best way to understand how to do this is to run some simple examples and examine the code.
 
-The following github repository https://github.com/CIT2202/pdo-simple-crud contains CRUD examples for working with a countries table. 
+The following github repository https://github.com/CIT2202/pdo-simple-crud contains CRUD examples for working with a countries table.

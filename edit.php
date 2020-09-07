@@ -1,6 +1,6 @@
 <?php
 try{
-  $conn = new PDO('mysql:host=localhost;dbname=examples', 'cit2202', 'letmein');
+  $conn = new PDO('mysql:host=localhost;dbname=cit2202', 'cit2202', 'letmein');
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch (PDOException $exception)
@@ -8,7 +8,7 @@ catch (PDOException $exception)
 	echo "Oh no, there was a problem" . $exception->getMessage();
 }
 
-//the id from the query string e.g. details.php?id=2
+//the id from the radio buttons in the form
 $countryId=$_POST['id'];
 
 //prepared statement uses the id to select a single country

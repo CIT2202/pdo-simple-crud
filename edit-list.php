@@ -1,6 +1,6 @@
 <?php
 try{
-  $conn = new PDO('mysql:host=localhost;dbname=examples', 'cit2202', 'letmein');
+  $conn = new PDO('mysql:host=localhost;dbname=cit2202', 'cit2202', 'letmein');
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch (PDOException $exception)
@@ -32,7 +32,7 @@ $conn=NULL;
 foreach ($countries as $country) {
     echo "<p>";
     echo "<label>";
-    //outputs a radio button for each country e.g. <label><input type="radio" name="country" value="2" '="">France</label>
+    //outputs a radio button for each country e.g. <label><input type="radio" name="country" value="2">France</label>
     echo "<input type='radio' name='id' value='{$country["id"]}''>";
     echo "{$country["name"]}</label>";
     echo "</p>";
