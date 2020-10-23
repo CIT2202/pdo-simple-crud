@@ -15,11 +15,16 @@ We will use PDO. This is for two reasons:
 2. PDO offers some advantages over MySQLi e.g. it can work with many different databases not just MySQL.
 
 ## Connecting to a database using PDO
-The following code will create a connection to a database. The connection will be stored in the ``` $conn``` variable.
+The following code will create a connection to a MySQL database. We have to specify
+* The name of the database we want to connect to.
+* The mysql username for this database.
+* The mysql password for this database.
+
+The connection will be stored in the ``` $conn``` variable.
 ```php
 <?php
 try{
-     $conn = new PDO('mysql:host=localhost;dbname=**nameOfDb**', '**username**', '**password**');
+     $conn = new PDO('mysql:host=localhost;dbname=nameOfDatabase', 'username', 'password');
      $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
 catch (PDOException $exception)
@@ -51,7 +56,7 @@ The line of code
 $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 ```
 
-Switches on error reporting for SQL errors. This is useful for us when debugging our code. However, it's not a good idea to leave this in for live website as displaying errors in a live website potentially poses a security risk.
+Switches on error reporting for SQL errors. This is useful for us when debugging our code. However, it's not a good idea to display errors in a live website. The error message could reveal information about our database structure that could be used to attack the site.
 
 ## query()
 There are a number different ways of running SQL from PHP. The first of these we will look at is the ```query()``` method. This is used for SELECT queries that **don't** involve user input e.g. selecting all the rows from a table.
@@ -87,11 +92,11 @@ foreach ($countries as $country) {
 }
 ?>
 ```
-```$conn->query($query);``` executes a query against the database. Note that this uses exactly the same SQL code that we used previously.
+* ```$conn->query($query);``` executes a query against the database. Note that this uses exactly the same SQL code that we used previously.
 
-The ```query()``` method returns a resultset, a collection of rows.
+* The ```query()``` method returns a resultset, a collection of rows.
 
-```$countries  = $resultset->fetchAll();``` fetches all the rows from the resultset as an array of associative arrays i.e.
+* ```$countries  = $resultset->fetchAll();``` fetches all the rows from the resultset as an array of associative arrays i.e.
 
 ```php
 [
@@ -100,9 +105,7 @@ The ```query()``` method returns a resultset, a collection of rows.
     ["id"=>3,"name"=>"Germany", "population"=>82000000]
 ]
 ```
-We can then use a foreach loop to display each country name.
-
-It is worth taking a few moments and trying to understand what each line is doing. We will use code like this over and over again.
+* We can then use a ```foreach``` loop to display each country name.
 
 ```php
 foreach ($countries as $country) {
@@ -111,6 +114,7 @@ foreach ($countries as $country) {
     echo "</p>";
 }
 ```
+It is worth taking a few moments and trying to understand what each line is doing. We will use code like this over and over again.
 
 ## fetchAll() vs fetch()
 
@@ -144,7 +148,7 @@ echo "{$country['name']} "; //outputs France
 So if we use ```fetch()``` we don't need a ```foreach``` loop to output the result.  
 
 ## Prepared Statements
-The second way in which we will run SQL statements using PDO is using prepared statements. Whenever the query involves user input we need to use a prepared statement e.g. the user enters a search term that we use to query the database or the user enters a username and password that we need to check against details in a database table. Have a look at the following example:
+The second way in which we will run SQL statements is using prepared statements. Whenever the query involves user input we need to use a prepared statement e.g. the user enters a search term that we use to query the database or the user enters a username and password that we need to check against details in a database table. Have a look at the following example:
 ```php
 <?php
 try{
@@ -168,7 +172,7 @@ echo "<p>{$country['name']} has a population {$country['population']}.</p>"; //o
 ```
 This looks very similar to the previous example that used ```query()``` but there are some key differences.
 
-The SQL features a placeholder, the bit that says *:countryName*
+The SQL features a placeholder, the bit that says ```:countryName```
 
 ```
 $query = "SELECT * FROM countries WHERE name=:countryName;";
@@ -180,7 +184,7 @@ $preparedStmt->bindValue(':countryName','France');
 ```
 In this example we have hard-coded in the word 'France'. Typically this value would come from a PHP form.
 
-We still use ```fetch()``` and ```fetchAll()``` to retrieve the result of our query.
+We still use ```fetch()``` or ```fetchAll()``` to retrieve the result of our query.
 
 Take a bit of time to compare the use of the ```query()``` method and prepared statements.
 
